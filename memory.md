@@ -41,7 +41,7 @@ Finish the repository session end to end: publish the project to GitHub, verify 
 
 - GitHub repository: https://github.com/tolegeen9909-commits/krisha-bot
 - Netlify site: https://krisha-telegram-bot.netlify.app
-- PR: pending during this memory update.
+- PR: https://github.com/tolegeen9909-commits/krisha-bot/pull/1
 - Deploy: pending during this memory update.
 
 ### Remaining Work
