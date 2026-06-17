@@ -36,13 +36,16 @@ Finish the repository session end to end: publish the project to GitHub, verify 
 - `gh auth status` confirmed login to GitHub as `tolegeen9909-commits`.
 - `gh repo view --json nameWithOwner,url,visibility,defaultBranchRef` confirmed the repo is public and uses `main`.
 - `npm_config_cache=.npm-cache npx netlify status` confirmed the project is linked to Netlify site `krisha-telegram-bot`.
+- `npm_config_cache=.npm-cache npx netlify deploy --prod` completed successfully.
+- Browser verification confirmed the production page title and H1 are `Krisha Telegram Bot`.
+- `curl https://krisha-telegram-bot.netlify.app/api/health` returned HTTP 200 with `ok: true`.
 
 ### Links
 
 - GitHub repository: https://github.com/tolegeen9909-commits/krisha-bot
 - Netlify site: https://krisha-telegram-bot.netlify.app
 - PR: https://github.com/tolegeen9909-commits/krisha-bot/pull/1
-- Deploy: pending during this memory update.
+- Deploy: https://krisha-telegram-bot.netlify.app
 
 ### Remaining Work
 
