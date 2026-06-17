@@ -1,0 +1,697 @@
+{
+  "_meta": {
+    "description": "Гео-дерево krisha.kz из sitemap (search*.xml, query срезан). Единая схема узлов.",
+    "captured_at": "2026-06-07",
+    "source": "https://krisha.kz/sitemap/frontend/search{,_2,_3,_4}.xml",
+    "requests_to_krisha": 4,
+    "status": "from-sitemap-cleaned",
+    "node_count": 68,
+    "node_fields": "name | slug | type | url_path | parent_url_path | verified | in_sitemap | name_source",
+    "url_path_rule": "url_path САМОДОСТАТОЧЕН (полный путь после категории). parent_url_path — справочная иерархия, url_path из неё НЕ выводится (напр. besagash-dzerzhinskoe без префикса региона).",
+    "coverage_note": "Покрытие = регионы (-oblast) и города/районы, проиндексированные krisha в sitemap. Отфильтрованы типы недвижимости/typi-*/das-комбо. Зарубежные направления помечены type=country. ГРАНУЛЯРНЫЕ СЁЛА могут отсутствовать (besagash-dzerzhinskoe в sitemap НЕ был — из verified seed). Для отсутствующих — url_path из адресной строки браузера (feedback-minimize-krisha-probing).",
+    "lookup_note": "Ключ — url_path (уникален). Один slug может встречаться с разными url_path (напр. talgar и almatinskaya-oblast/talgar) — это разные валидные пути."
+  },
+  "nodes": [
+    {
+      "name": "Abay oblast",
+      "slug": "abay-oblast",
+      "type": "region",
+      "url_path": "abay-oblast",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Aksaj",
+      "slug": "aksaj",
+      "type": "city_or_settlement",
+      "url_path": "aksaj",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Aktau",
+      "slug": "aktau",
+      "type": "city_or_settlement",
+      "url_path": "aktau",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Aktjubinskaja oblast",
+      "slug": "aktjubinskaja-oblast",
+      "type": "region",
+      "url_path": "aktjubinskaja-oblast",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Aktobe",
+      "slug": "aktobe",
+      "type": "city_or_settlement",
+      "url_path": "aktobe",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Almatinskaja oblast",
+      "slug": "almatinskaja-oblast",
+      "type": "region",
+      "url_path": "almatinskaja-oblast",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Алматинская область",
+      "slug": "almatinskaya-oblast",
+      "type": "region",
+      "url_path": "almatinskaya-oblast",
+      "parent_url_path": null,
+      "verified": true,
+      "name_source": "manual",
+      "in_sitemap": false
+    },
+    {
+      "name": "Талгар",
+      "slug": "talgar",
+      "type": "city",
+      "url_path": "almatinskaya-oblast/talgar",
+      "parent_url_path": "almatinskaya-oblast",
+      "verified": true,
+      "name_source": "manual",
+      "in_sitemap": false
+    },
+    {
+      "name": "Талгарский район",
+      "slug": "talgarskij-rajon",
+      "type": "district",
+      "url_path": "almatinskaya-oblast/talgarskij-rajon",
+      "parent_url_path": "almatinskaya-oblast",
+      "verified": true,
+      "name_source": "manual",
+      "in_sitemap": false
+    },
+    {
+      "name": "Алматы",
+      "slug": "almaty",
+      "type": "city",
+      "url_path": "almaty",
+      "parent_url_path": null,
+      "verified": true,
+      "name_source": "manual",
+      "in_sitemap": true
+    },
+    {
+      "name": "Armeniya",
+      "slug": "armeniya",
+      "type": "country",
+      "url_path": "armeniya",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Астана",
+      "slug": "astana",
+      "type": "city",
+      "url_path": "astana",
+      "parent_url_path": null,
+      "verified": true,
+      "name_source": "manual",
+      "in_sitemap": true
+    },
+    {
+      "name": "Atyrau",
+      "slug": "atyrau",
+      "type": "city_or_settlement",
+      "url_path": "atyrau",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Atyrauskaja oblast",
+      "slug": "atyrauskaja-oblast",
+      "type": "region",
+      "url_path": "atyrauskaja-oblast",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Bajkonur",
+      "slug": "bajkonur",
+      "type": "city_or_settlement",
+      "url_path": "bajkonur",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Balhash",
+      "slug": "balhash",
+      "type": "city_or_settlement",
+      "url_path": "balhash",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Бесагаш (Дзержинское)",
+      "slug": "besagash-dzerzhinskoe",
+      "type": "settlement",
+      "url_path": "besagash-dzerzhinskoe",
+      "parent_url_path": "almatinskaya-oblast/talgarskij-rajon",
+      "note": "krisha.kz/prodazha/kvartiry/besagash-dzerzhinskoe/ — без префикса региона; parent справочный",
+      "verified": true,
+      "name_source": "manual",
+      "in_sitemap": false
+    },
+    {
+      "name": "Boroldaj burundaj",
+      "slug": "boroldaj-burundaj",
+      "type": "city_or_settlement",
+      "url_path": "boroldaj-burundaj",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Ekibastuz",
+      "slug": "ekibastuz",
+      "type": "city_or_settlement",
+      "url_path": "ekibastuz",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Grecija",
+      "slug": "grecija",
+      "type": "country",
+      "url_path": "grecija",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Gruzija",
+      "slug": "gruzija",
+      "type": "country",
+      "url_path": "gruzija",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Indoneziya",
+      "slug": "indoneziya",
+      "type": "country",
+      "url_path": "indoneziya",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Ispanija",
+      "slug": "ispanija",
+      "type": "country",
+      "url_path": "ispanija",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Italija",
+      "slug": "italija",
+      "type": "country",
+      "url_path": "italija",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Jetisyskaya oblast",
+      "slug": "jetisyskaya-oblast",
+      "type": "region",
+      "url_path": "jetisyskaya-oblast",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Juzhno kazahstanskaja oblast",
+      "slug": "juzhno-kazahstanskaja-oblast",
+      "type": "region",
+      "url_path": "juzhno-kazahstanskaja-oblast",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Kambodzha",
+      "slug": "kambodzha",
+      "type": "country",
+      "url_path": "kambodzha",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Karaganda",
+      "slug": "karaganda",
+      "type": "city_or_settlement",
+      "url_path": "karaganda",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Karagandinskaja oblast",
+      "slug": "karagandinskaja-oblast",
+      "type": "region",
+      "url_path": "karagandinskaja-oblast",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Kaskelen",
+      "slug": "kaskelen",
+      "type": "city_or_settlement",
+      "url_path": "kaskelen",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Kipr",
+      "slug": "kipr",
+      "type": "country",
+      "url_path": "kipr",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Kokshetau",
+      "slug": "kokshetau",
+      "type": "city_or_settlement",
+      "url_path": "kokshetau",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Konaev",
+      "slug": "konaev",
+      "type": "city_or_settlement",
+      "url_path": "konaev",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Kostanaj",
+      "slug": "kostanaj",
+      "type": "city_or_settlement",
+      "url_path": "kostanaj",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Kostanajskaja oblast",
+      "slug": "kostanajskaja-oblast",
+      "type": "region",
+      "url_path": "kostanajskaja-oblast",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Kulsary",
+      "slug": "kulsary",
+      "type": "city_or_settlement",
+      "url_path": "kulsary",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Kyrgyzstan",
+      "slug": "kyrgyzstan",
+      "type": "country",
+      "url_path": "kyrgyzstan",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Kyzylorda",
+      "slug": "kyzylorda",
+      "type": "city_or_settlement",
+      "url_path": "kyzylorda",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Kyzylordinskaja oblast",
+      "slug": "kyzylordinskaja-oblast",
+      "type": "region",
+      "url_path": "kyzylordinskaja-oblast",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Lisakovsk",
+      "slug": "lisakovsk",
+      "type": "city_or_settlement",
+      "url_path": "lisakovsk",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Mangistauskaja oblast",
+      "slug": "mangistauskaja-oblast",
+      "type": "region",
+      "url_path": "mangistauskaja-oblast",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Pavlodar",
+      "slug": "pavlodar",
+      "type": "city_or_settlement",
+      "url_path": "pavlodar",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Pavlodarskaja oblast",
+      "slug": "pavlodarskaja-oblast",
+      "type": "region",
+      "url_path": "pavlodarskaja-oblast",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Petropavlovsk",
+      "slug": "petropavlovsk",
+      "type": "city_or_settlement",
+      "url_path": "petropavlovsk",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Qatar",
+      "slug": "qatar",
+      "type": "country",
+      "url_path": "qatar",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Ridder",
+      "slug": "ridder",
+      "type": "city_or_settlement",
+      "url_path": "ridder",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Rossija",
+      "slug": "rossija",
+      "type": "country",
+      "url_path": "rossija",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Rudnyj",
+      "slug": "rudnyj",
+      "type": "city_or_settlement",
+      "url_path": "rudnyj",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Saudovskaja aravija",
+      "slug": "saudovskaja-aravija",
+      "type": "country",
+      "url_path": "saudovskaja-aravija",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Semej",
+      "slug": "semej",
+      "type": "city_or_settlement",
+      "url_path": "semej",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Severo kazahstanskaja oblast",
+      "slug": "severo-kazahstanskaja-oblast",
+      "type": "region",
+      "url_path": "severo-kazahstanskaja-oblast",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Shahtinsk",
+      "slug": "shahtinsk",
+      "type": "city_or_settlement",
+      "url_path": "shahtinsk",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Shhuchinsk",
+      "slug": "shhuchinsk",
+      "type": "city_or_settlement",
+      "url_path": "shhuchinsk",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Shri lanka",
+      "slug": "shri-lanka",
+      "type": "country",
+      "url_path": "shri-lanka",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Шымкент",
+      "slug": "shymkent",
+      "type": "city",
+      "url_path": "shymkent",
+      "parent_url_path": null,
+      "verified": true,
+      "name_source": "manual",
+      "in_sitemap": true
+    },
+    {
+      "name": "Taldykorgan",
+      "slug": "taldykorgan",
+      "type": "city_or_settlement",
+      "url_path": "taldykorgan",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Talgar",
+      "slug": "talgar",
+      "type": "city_or_settlement",
+      "url_path": "talgar",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Taraz",
+      "slug": "taraz",
+      "type": "city_or_settlement",
+      "url_path": "taraz",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Temirtau",
+      "slug": "temirtau",
+      "type": "city_or_settlement",
+      "url_path": "temirtau",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Turkestan",
+      "slug": "turkestan",
+      "type": "city_or_settlement",
+      "url_path": "turkestan",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Ulitayskay oblast",
+      "slug": "ulitayskay-oblast",
+      "type": "region",
+      "url_path": "ulitayskay-oblast",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Uralsk",
+      "slug": "uralsk",
+      "type": "city_or_settlement",
+      "url_path": "uralsk",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Ust kamenogorsk",
+      "slug": "ust-kamenogorsk",
+      "type": "city_or_settlement",
+      "url_path": "ust-kamenogorsk",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Vetnam",
+      "slug": "vetnam",
+      "type": "country",
+      "url_path": "vetnam",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Vostochno kazahstanskaja oblast",
+      "slug": "vostochno-kazahstanskaja-oblast",
+      "type": "region",
+      "url_path": "vostochno-kazahstanskaja-oblast",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Zapadno kazahstanskaja oblast",
+      "slug": "zapadno-kazahstanskaja-oblast",
+      "type": "region",
+      "url_path": "zapadno-kazahstanskaja-oblast",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Zhambylskaja oblast",
+      "slug": "zhambylskaja-oblast",
+      "type": "region",
+      "url_path": "zhambylskaja-oblast",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    },
+    {
+      "name": "Zhezkazgan",
+      "slug": "zhezkazgan",
+      "type": "city_or_settlement",
+      "url_path": "zhezkazgan",
+      "parent_url_path": null,
+      "verified": false,
+      "in_sitemap": true,
+      "name_source": "derived-from-slug"
+    }
+  ]
+}

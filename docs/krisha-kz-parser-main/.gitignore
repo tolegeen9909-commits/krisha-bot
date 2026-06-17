@@ -1,0 +1,17 @@
+.env
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.playwright/
+.session-cookies*.json
+
+# Собранные данные (телефоны реальных людей) — НИКОГДА не коммитить
+besagash_*.csv
+*_phones.csv
+*_clean.csv
+
+# Локальные настройки Claude Code
+.claude/settings.local.json
+.claude/scheduled_tasks.lock

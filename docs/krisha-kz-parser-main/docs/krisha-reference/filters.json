@@ -1,0 +1,53 @@
+{
+  "_meta": {
+    "description": "Схема URL-фильтров krisha.kz (параметры das[...]). Источник правды для построения поисковых URL.",
+    "captured_at": "2026-06-07",
+    "url_shape": "https://krisha.kz/{category}/{geo_url_path}/?{das_filters}",
+    "notes": [
+      "geo_url_path берётся из geo.json (поле url_path), НЕ угадывается.",
+      "Неверный путь отдаёт HTTP 404 со страницей error-content + блок hot-list (НЕ выдача).",
+      "Повторяющиеся параметры-массивы используют синтаксис []: das[live.rooms][]=3&das[live.rooms][]=4"
+    ]
+  },
+  "filters": {
+    "live.rooms": {
+      "syntax": "das[live.rooms][]=N",
+      "array": true,
+      "values": {"1": "1-комн", "2": "2-комн", "3": "3-комн", "4": "4-комн", "5.100": "5 и более"},
+      "note": "N.100 = «N и более». Для «2+» повторить []=2&[]=3&[]=4&[]=5.100"
+    },
+    "price": {
+      "syntax": "das[price][from]=N&das[price][to]=N",
+      "unit": "тенге",
+      "example": "das[price][from]=55000000&das[price][to]=75000000"
+    },
+    "house.year": {
+      "syntax": "das[house.year][from]=YYYY&das[house.year][to]=YYYY",
+      "note": "Можно только from (открытая верхняя граница)"
+    },
+    "who": {
+      "syntax": "das[who]=1",
+      "meaning": "только хозяева (без агентов). Без параметра = все."
+    },
+    "_sys.fromAgent": {
+      "syntax": "das[_sys.fromAgent]=1",
+      "meaning": "только агенты"
+    },
+    "live.square": {
+      "syntax": "das[live.square][from]=N&das[live.square][to]=N",
+      "unit": "м²"
+    },
+    "flat.building": {
+      "syntax": "das[flat.building]=N",
+      "values": {"1": "панель", "2": "кирпич", "3": "монолит"}
+    },
+    "novostroiki": {"syntax": "das[novostroiki]=1", "meaning": "только новостройки"},
+    "mortgage": {"syntax": "das[mortgage]=1", "meaning": "с ипотекой"},
+    "house.floor_num": {"syntax": "das[house.floor_num][from]=N", "meaning": "этажность дома от"},
+    "flat.floor": {"syntax": "das[flat.floor][from]=N&das[flat.floor][to]=N", "meaning": "этаж квартиры"},
+    "floor_not_first": {"syntax": "das[floor_not_first]=1", "meaning": "не первый этаж"},
+    "floor_not_last": {"syntax": "das[floor_not_last]=1", "meaning": "не последний этаж"},
+    "has_change": {"syntax": "das[has_change]=1", "meaning": "есть обмен"},
+    "flat.phone": {"syntax": "das[flat.phone]=1", "meaning": "с телефоном"}
+  }
+}

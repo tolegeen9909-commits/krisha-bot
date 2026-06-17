@@ -1,0 +1,143 @@
+{
+  "_meta": {
+    "description": "Схема URL-фильтров krisha.kz (параметры das[...]). Источник правды для построения поисковых URL.",
+    "captured_at": "2026-06-07",
+    "url_shape": "https://krisha.kz/{category}/{geo_url_path}/?{das_filters}",
+    "notes": [
+      "geo_url_path берётся из geo.json (поле url_path), НЕ угадывается.",
+      "Неверный путь отдаёт HTTP 404 со страницей error-content + блок hot-list (НЕ выдача).",
+      "Повторяющиеся параметры-массивы используют синтаксис []: das[live.rooms][]=3&das[live.rooms][]=4"
+    ]
+  },
+  "filters": {
+    "live.rooms": {
+      "syntax": "das[live.rooms][]=N",
+      "array": true,
+      "values": {"1": "1-комн", "2": "2-комн", "3": "3-комн", "4": "4-комн", "5.100": "5 и более"},
+      "note": "N.100 = «N и более». Для «2+» повторить []=2&[]=3&[]=4&[]=5.100"
+    },
+    "price": {
+      "syntax": "das[price][from]=N&das[price][to]=N",
+      "unit": "тенге",
+      "example": "das[price][from]=55000000&das[price][to]=75000000"
+    },
+    "house.year": {
+      "syntax": "das[house.year][from]=YYYY&das[house.year][to]=YYYY",
+      "note": "Можно только from (открытая верхняя граница)"
+    },
+    "who": {
+      "syntax": "das[who]=1",
+      "meaning": "только хозяева (без агентов). Без параметра = все."
+    },
+    "_sys.fromAgent": {
+      "syntax": "das[_sys.fromAgent]=1",
+      "meaning": "только агенты"
+    },
+    "live.square": {
+      "syntax": "das[live.square][from]=N&das[live.square][to]=N",
+      "unit": "м²"
+    },
+    "flat.building": {
+      "syntax": "das[flat.building]=N",
+      "values": {"1": "кирпич", "2": "панель", "3": "монолит"}
+    },
+    "novostroiki": {"syntax": "das[novostroiki]=1", "meaning": "только новостройки"},
+    "mortgage": {"syntax": "das[mortgage]=1|0", "meaning": "в залоге: 1 = да, 0 = нет"},
+    "house.floor_num": {"syntax": "das[house.floor_num][from]=N&das[house.floor_num][to]=N", "meaning": "этажность дома"},
+    "flat.floor": {"syntax": "das[flat.floor][from]=N&das[flat.floor][to]=N", "meaning": "этаж квартиры"},
+    "floor_not_first": {"syntax": "das[floor_not_first]=1", "meaning": "не первый этаж"},
+    "floor_not_last": {"syntax": "das[floor_not_last]=1", "meaning": "не последний этаж"},
+    "has_change": {"syntax": "das[has_change]=1", "meaning": "есть обмен"},
+    "_sys.hasphoto": {"syntax": "das[_sys.hasphoto]=1", "meaning": "только объявления с фото"},
+    "flat.toilet": {
+      "syntax": "das[flat.toilet]=N",
+      "values": {"1": "раздельный", "2": "совмещенный", "3": "2 с/у и более", "4": "нет"}
+    },
+    "flat.phone": {
+      "syntax": "das[flat.phone]=N",
+      "values": {"1": "отдельный", "2": "блокиратор", "3": "есть возможность подключения", "4": "нет"}
+    },
+    "flat.priv_dorm": {
+      "syntax": "das[flat.priv_dorm]=N",
+      "values": {"1": "да", "2": "нет"},
+      "meaning": "бывшее общежитие"
+    },
+    "live.square_k": {
+      "syntax": "das[live.square_k][from]=N&das[live.square_k][to]=N",
+      "unit": "м²",
+      "meaning": "площадь кухни"
+    },
+    "land.square": {
+      "syntax": "das[land.square][from]=N&das[land.square][to]=N",
+      "unit": "соток",
+      "meaning": "площадь участка"
+    },
+    "house.type_object": {
+      "syntax": "das[house.type_object]=N",
+      "values": {"1": "отдельный дом", "2": "часть дома", "3": "дача"}
+    },
+    "house.building_opts": {
+      "syntax": "das[house.building_opts]=N",
+      "values": {
+        "1": "кирпич",
+        "2": "монолит",
+        "3": "дерево",
+        "4": "саман",
+        "5": "газосиликатный блок",
+        "6": "газобетонный блок",
+        "7": "шлакоблок",
+        "8": "пеноблок",
+        "9": "теплоблок",
+        "10": "каркасно-камышитовый",
+        "11": "каркасно-щитовой",
+        "12": "СИП-панели",
+        "13": "ЖБ-панели",
+        "14": "ракушняк",
+        "15": "финблок"
+      }
+    },
+    "house.renewal": {
+      "syntax": "das[house.renewal]=N",
+      "values": {
+        "1": "свежий ремонт",
+        "2": "не новый, но аккуратный ремонт",
+        "3": "нужен ремонт",
+        "4": "черновая отделка",
+        "5": "под снос",
+        "6": "недостроенный"
+      }
+    },
+    "cmtn.heating": {
+      "syntax": "das[cmtn.heating]=N",
+      "values": {"1": "центральное", "2": "на газе", "3": "на твердом топливе", "4": "на жидком топливе", "7": "на электричестве", "5": "смешанное", "6": "нет"}
+    },
+    "cmtn.sewage": {
+      "syntax": "das[cmtn.sewage]=N",
+      "values": {"1": "центральная", "2": "можно подвести", "3": "септик", "4": "нет"}
+    },
+    "land.earmarked": {
+      "syntax": "das[land.earmarked]=N",
+      "values": {"1": "ИЖС", "2": "КХ", "3": "ЛПХ", "4": "садоводство", "5": "коммерческое", "6": "МЖС", "7": "дачное строительство", "8": "другое"}
+    },
+    "land.separable": {
+      "syntax": "das[land.separable]=N",
+      "values": {"1": "делимый", "2": "неделимый"}
+    },
+    "com.use_case": {
+      "syntax": "das[com.use_case]=N",
+      "values": {"1": "свободное назначение", "2": "офисы", "3": "магазины и бутики", "4": "склады", "5": "АЗС, автосервисы и автомойки", "6": "общепит", "7": "салоны красоты", "8": "сельское хозяйство", "9": "бани, гостиницы и зоны отдыха", "11": "медцентры и аптеки", "12": "образование", "13": "развлечения"}
+    },
+    "com.location": {
+      "syntax": "das[com.location]=N",
+      "values": {"1": "в бизнес-центре", "2": "в жилом доме или ЖК", "3": "в торговом центре", "4": "на универсальном рынке", "5": "отдельностоящее здание"}
+    },
+    "com.square": {
+      "syntax": "das[com.square][from]=N&das[com.square][to]=N",
+      "unit": "м²",
+      "meaning": "площадь коммерческого объекта"
+    },
+    "com.is_tenants": {"syntax": "das[com.is_tenants]=1", "meaning": "есть арендаторы"},
+    "estate.is_buss": {"syntax": "das[estate.is_buss]=1", "meaning": "действующий бизнес"},
+    "_txt_": {"syntax": "_txt_=TEXT", "meaning": "публичный поиск по тексту объявления"}
+  }
+}

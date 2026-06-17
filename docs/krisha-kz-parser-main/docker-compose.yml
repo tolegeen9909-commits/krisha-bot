@@ -1,0 +1,33 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: krisha
+      POSTGRES_PASSWORD: krisha
+      POSTGRES_DB: krisha_bot
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U krisha -d krisha_bot"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  bot:
+    build: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+asyncpg://krisha:krisha@postgres:5432/krisha_bot
+      AZURE_KEYVAULT_URL: ${AZURE_KEYVAULT_URL:-https://kv-bronxtc-dev.vault.azure.net/}
+      # Injected at runtime by scripts/start-dev.sh — never stored here
+      KRISHA_LOGIN: ${KRISHA_LOGIN:-}
+      KRISHA_PASSWORD: ${KRISHA_PASSWORD:-}
+      # SOCKS5 туннель через KZ-сервер (python3 scripts/kz-tunnel.py --detach)
+      ALL_PROXY: ${ALL_PROXY:-}
+      HTTPS_PROXY: ${ALL_PROXY:-}
+    stdin_open: true
+
+volumes:
+  postgres_data:

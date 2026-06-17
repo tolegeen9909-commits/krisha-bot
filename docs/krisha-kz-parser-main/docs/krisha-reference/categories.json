@@ -1,0 +1,27 @@
+{
+  "_meta": {
+    "description": "Категории krisha.kz (путь {transaction}/{property-type} в URL перед geo url_path).",
+    "captured_at": "2026-06-07",
+    "source": "sitemap search*.xml (раздел categories_seen в geo.json)"
+  },
+  "categories": [
+    {"slug": "prodazha/kvartiry", "name": "Продажа квартир"},
+    {"slug": "prodazha/doma-dachi", "name": "Продажа домов и дач"},
+    {"slug": "prodazha/uchastkov", "name": "Продажа участков"},
+    {"slug": "prodazha/kommercheskaya-nedvizhimost", "name": "Продажа коммерческой недвижимости"},
+    {"slug": "prodazha/garazhi", "name": "Продажа гаражей"},
+    {"slug": "prodazha/prombazy", "name": "Продажа промбаз"},
+    {"slug": "prodazha/biznes", "name": "Продажа готового бизнеса"},
+    {"slug": "prodazha/zarubezhnoj-nedvizhimosti", "name": "Продажа зарубежной недвижимости"},
+    {"slug": "arenda/kvartiry", "name": "Аренда квартир (долгосрочная)"},
+    {"slug": "arenda/kvartiry-posutochno", "name": "Аренда квартир посуточно"},
+    {"slug": "arenda/kvartiry-po-chasam", "name": "Аренда квартир по часам"},
+    {"slug": "arenda/komnaty", "name": "Аренда комнат"},
+    {"slug": "arenda/doma-dachi", "name": "Аренда домов и дач"},
+    {"slug": "arenda/doma-dachi-posutochno", "name": "Аренда домов и дач посуточно"},
+    {"slug": "arenda/kommercheskaya-nedvizhimost", "name": "Аренда коммерческой недвижимости"},
+    {"slug": "arenda/prombazy", "name": "Аренда промбаз"},
+    {"slug": "arenda/vozmu-v-arendu", "name": "Возьму в аренду"}
+  ],
+  "note": "Старые пути prodazha/kvartiry работают; sitemap также показывает arenda/* (вместо arenda-dolgosrochnaya/*). Полный список увиденных категорий — в geo.json → categories_seen."
+}

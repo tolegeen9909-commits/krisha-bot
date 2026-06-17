@@ -1,0 +1,14 @@
+node_modules/
+.npm-cache/
+.netlify/
+.env
+.env.*
+!.env.example
+dist/
+coverage/
+deno.lock
+npm-debug.log*
+.DS_Store
+*.log
+docs/krisha-kz-parser-main.zip
+.session-cookies*.json
