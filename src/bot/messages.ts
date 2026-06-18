@@ -471,7 +471,7 @@ export function formatSavedSearchNotFound(savedSearchId: string): string {
 
 export function formatSavedSearchAlert(savedSearch: SavedSearch, listings: ListingResult[]): string {
   const lines = [
-    `<b>Новые объявления</b>`,
+    `<b>Обновления по поиску</b>`,
     `Поиск <code>${escapeHtml(savedSearch.id)}</code> · ${escapeHtml(formatIntentSummary(savedSearch.intent))}`,
     `<a href="${escapeHtml(savedSearch.searchUrl)}">Открыть поиск на Krisha</a>`,
     "",
