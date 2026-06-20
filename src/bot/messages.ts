@@ -135,6 +135,7 @@ export function formatHelpMessage(): string {
     "Задача: <code>задача проверить документы по объекту 12345678</code>",
     "Мои задачи: <code>мои задачи</code>",
     "Следить: <code>следи за 2-комн Алматы до 45 млн</code>",
+    "Проверить вручную: <code>проверь мои поиски</code>",
     "Список: <code>мои поиски</code>",
     "Остановить: <code>останови поиск abc12345</code>",
     "",
@@ -412,12 +413,13 @@ export function formatSavedSearchCreated(savedSearch: SavedSearch, result: TaskR
   ];
 
   if (result.status === "fetch_disabled") {
-    lines.push("Буду следить после включения живого чтения публичной выдачи.");
+    lines.push("Поиск сохранил. Автоуведомления выключены. Для ручной проверки напишите: <code>проверь мои поиски</code>.");
     return lines.join("\n");
   }
 
   if (result.status === "fetch_failed") {
     lines.push("Поиск сохранил, но первую публичную страницу сейчас не удалось прочитать.");
+    lines.push("Автоуведомления выключены. Для ручной проверки напишите: <code>проверь мои поиски</code>.");
     if (result.error) lines.push(escapeHtml(result.error));
     return lines.join("\n");
   }
@@ -428,11 +430,13 @@ export function formatSavedSearchCreated(savedSearch: SavedSearch, result: TaskR
         ? `Поиск сохранил. Первую страницу прочитал, но видимых карточек по ЖК ${escapeHtml(savedSearch.intent.residentialComplexName)} не нашел.`
         : "Поиск сохранил. Первую страницу прочитал, но карточки объявлений не распознал.",
     );
+    lines.push("Автоуведомления выключены. Для ручной проверки напишите: <code>проверь мои поиски</code>.");
     return lines.join("\n");
   }
 
   lines.push("Текущие объявления запомнил и повторно их присылать не буду:");
   lines.push("", ...formatListings(result.listings));
+  lines.push("", "Автоуведомления выключены. Для ручной проверки напишите: <code>проверь мои поиски</code>.");
   return lines.join("\n");
 }
 
@@ -452,6 +456,32 @@ export function formatSavedSearchList(searches: SavedSearch[]): string {
 
   if (searches.length > 20) {
     lines.push(`...и еще ${searches.length - 20}`);
+  }
+
+  lines.push("", "Проверить вручную: <code>проверь мои поиски</code>");
+  return lines.join("\n");
+}
+
+export function formatManualSavedSearchCheckSummary(summary: {
+  checked: number;
+  sent: number;
+  failed: number;
+  skipped: number;
+}): string {
+  const lines = ["<b>Проверка поисков</b>"];
+
+  if (summary.sent > 0) {
+    lines.push(`Нашел обновления: ${summary.sent}. Отправил их отдельным сообщением.`);
+  } else {
+    lines.push("Новых объявлений или снижений цены нет.");
+  }
+
+  if (summary.skipped > 0) {
+    lines.push(`Не удалось прочитать сейчас: ${summary.skipped}.`);
+  }
+
+  if (summary.failed > 0) {
+    lines.push(`Ошибок при проверке: ${summary.failed}.`);
   }
 
   return lines.join("\n");

@@ -4,6 +4,7 @@ import { parseBotCommandAsync } from "../../src/bot/commandParser";
 import { isContextUpdate } from "../../src/bot/contextMerge";
 import {
   formatHelpMessage,
+  formatManualSavedSearchCheckSummary,
   formatMarketAnalysisResponse,
   formatParseError,
   formatRealEstateQaResponse,
@@ -21,6 +22,7 @@ import {
   formatTrackedObjectsResponse,
 } from "../../src/bot/messages";
 import { answerRealEstateQuestion } from "../../src/bot/realEstateQa";
+import { checkSavedSearches } from "../../src/bot/savedSearchChecker";
 import {
   buildMarketSnapshot,
   enrichListingsForRealtor,
@@ -169,6 +171,22 @@ export default async (req: Request, _context: Context) => {
   if (parsed.command.kind === "list_searches") {
     const searches = await listSavedSearchesForChat(chatId);
     return telegramMessage(chatId, formatSavedSearchList(searches));
+  }
+
+  if (parsed.command.kind === "check_searches") {
+    const activeSearches = (await listSavedSearchesForChat(chatId)).filter((search) => search.status === "active");
+    if (activeSearches.length === 0) {
+      return telegramMessage(
+        chatId,
+        "Активных поисков нет. Сначала сохраните поиск: <code>следи за 2-комн Алматы до 45 млн</code>",
+      );
+    }
+
+    const summary = await checkSavedSearches({
+      maxActiveSearches: activeSearches.length,
+      listActiveSavedSearches: async (limit) => activeSearches.slice(0, limit),
+    });
+    return telegramMessage(chatId, formatManualSavedSearchCheckSummary(summary));
   }
 
   if (parsed.command.kind === "stop_search") {
