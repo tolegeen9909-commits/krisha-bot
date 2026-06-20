@@ -336,6 +336,12 @@ describe("parseBotCommand", () => {
     expect(parsed).toEqual({ ok: true, command: { kind: "list_searches" } });
   });
 
+  it("returns manual saved searches check command", () => {
+    const parsed = parseBotCommand("проверь мои поиски");
+
+    expect(parsed).toEqual({ ok: true, command: { kind: "check_searches" } });
+  });
+
   it("returns stop saved search command", () => {
     const parsed = parseBotCommand("останови поиск abc12345");
 

@@ -686,6 +686,19 @@ function stripTrackedObjectsPrefix(text: string): string | null {
   return match?.[1]?.trim() || null;
 }
 
+function isCheckSavedSearchesCommand(normalized: string): boolean {
+  return (
+    normalized === "проверь мои поиски" ||
+    normalized === "проверь поиски" ||
+    normalized === "проверить мои поиски" ||
+    normalized === "проверить поиски" ||
+    normalized === "обнови мои поиски" ||
+    normalized === "обнови поиски" ||
+    normalized === "что нового по поискам" ||
+    normalized === "есть новые объявления"
+  );
+}
+
 export function parseBotCommand(text: string): ParseResult {
   return parseBotCommandDeterministic(text);
 }
@@ -709,6 +722,10 @@ function parseBotCommandDeterministic(text: string, previousIntent?: SearchInten
     normalized === "список поисков"
   ) {
     return { ok: true, command: { kind: "list_searches" } };
+  }
+
+  if (isCheckSavedSearchesCommand(normalized)) {
+    return { ok: true, command: { kind: "check_searches" } };
   }
 
   const stopMatch = normalized.match(/^(?:останови|остановить|удали|удалить)\s+(?:поиск\s+)?([a-z0-9-]{4,})$/iu);

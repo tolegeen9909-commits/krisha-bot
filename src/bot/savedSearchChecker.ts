@@ -78,7 +78,8 @@ export async function checkSavedSearches(
         history: history.listings,
         now: checkedAt,
       });
-      const { unseen } = filterUnseenListings(enrichedListings, search.sentAdvertIds);
+      const knownAdvertIds = uniqueAdvertIds(search.sentAdvertIds, Object.keys(history.listings));
+      const { unseen } = filterUnseenListings(enrichedListings, knownAdvertIds);
       const priceDrops = enrichedListings.filter((listing) => listing.priceDrop);
       const listingsToSend = [...new Map([...unseen, ...priceDrops].map((listing) => [listing.advertId, listing])).values()].slice(
         0,
@@ -87,7 +88,7 @@ export async function checkSavedSearches(
       const nextHistory = updateListingHistory(history.listings, enrichedListings, checkedAt);
 
       if (listingsToSend.length === 0) {
-        await deps.updateSavedSearch({ ...search, lastCheckedAt: checkedAt });
+        await deps.updateSavedSearch({ ...search, sentAdvertIds: knownAdvertIds, lastCheckedAt: checkedAt });
         await deps.saveSavedSearchListingHistory({
           savedSearchId: search.id,
           listings: nextHistory,
@@ -100,7 +101,7 @@ export async function checkSavedSearches(
       await deps.sendTelegramMessage(search.chatId, formatSavedSearchAlert(search, listingsToSend));
 
       const sentIds = listingsToSend.map((listing) => listing.advertId);
-      const nextSentAdvertIds = uniqueAdvertIds(search.sentAdvertIds, sentIds);
+      const nextSentAdvertIds = uniqueAdvertIds(knownAdvertIds, sentIds);
       await deps.updateSavedSearch({
         ...search,
         sentAdvertIds: nextSentAdvertIds,

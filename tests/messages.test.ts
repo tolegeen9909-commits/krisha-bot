@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   formatDueReminderMessage,
+  formatManualSavedSearchCheckSummary,
   formatMarketAnalysisResponse,
   formatReminderTaskCreated,
   formatReminderTaskList,
@@ -85,6 +86,14 @@ describe("saved search messages", () => {
     expect(message).toContain("abc12345");
     expect(message).toContain("активен");
     expect(message).toContain("Алматы");
+    expect(message).toContain("проверь мои поиски");
+  });
+
+  it("formats manual saved search check summary", () => {
+    const message = formatManualSavedSearchCheckSummary({ checked: 1, sent: 0, failed: 0, skipped: 0 });
+
+    expect(message).toContain("Проверка поисков");
+    expect(message).toContain("Новых объявлений");
   });
 
   it("formats market analysis with visible-market caveat", () => {

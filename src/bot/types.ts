@@ -101,6 +101,7 @@ export type BotCommand =
   | { kind: "complete_task"; taskId: string }
   | { kind: "delete_task"; taskId: string }
   | { kind: "save_search"; intent: SearchIntent; sourceText: string }
+  | { kind: "check_searches" }
   | { kind: "list_searches" }
   | { kind: "stop_search"; savedSearchId: string };
 

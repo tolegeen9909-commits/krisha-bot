@@ -131,6 +131,62 @@ describe("checkSavedSearches", () => {
     expect(saveSavedSearchListingHistory).not.toHaveBeenCalled();
   });
 
+  it("does not resend listings that already exist in saved history", async () => {
+    const search = savedSearch({
+      sentAdvertIds: ["1"],
+      sentCount: 1,
+    });
+    const updateSavedSearch = vi.fn(async (next: SavedSearch) => next);
+    const sendTelegramMessage = vi.fn(async () => undefined);
+    const saveSavedSearchListingHistory = vi.fn(async (history: SavedSearchListingHistory) => history);
+
+    const summary = await checkSavedSearches({
+      listActiveSavedSearches: vi.fn(async () => [search]),
+      updateSavedSearch,
+      getSavedSearchListingHistory: vi.fn(async () => ({
+        savedSearchId: search.id,
+        listings: {
+          "2": {
+            advertId: "2",
+            title: "Listing 2",
+            url: "https://krisha.kz/a/show/2",
+            firstSeenAt: "2026-06-16T00:00:00.000Z",
+            lastSeenAt: "2026-06-16T00:00:00.000Z",
+          },
+        },
+        updatedAt: "2026-06-16T00:00:00.000Z",
+      })),
+      saveSavedSearchListingHistory,
+      runPublicSearch: vi.fn(async () => ({
+        status: "completed" as const,
+        listings: [listing("1"), listing("2")],
+      })),
+      sendTelegramMessage,
+      now: () => "2026-06-17T01:00:00.000Z",
+      maxActiveSearches: 10,
+      maxNewListings: 5,
+    });
+
+    expect(summary).toEqual({ checked: 1, sent: 0, failed: 0, skipped: 0, errors: [] });
+    expect(sendTelegramMessage).not.toHaveBeenCalled();
+    expect(updateSavedSearch).toHaveBeenCalledWith(
+      expect.objectContaining({
+        sentAdvertIds: ["1", "2"],
+        sentCount: 1,
+        lastCheckedAt: "2026-06-17T01:00:00.000Z",
+      }),
+    );
+    expect(saveSavedSearchListingHistory).toHaveBeenCalledWith(
+      expect.objectContaining({
+        savedSearchId: "abc12345",
+        listings: expect.objectContaining({
+          "1": expect.objectContaining({ advertId: "1" }),
+          "2": expect.objectContaining({ advertId: "2" }),
+        }),
+      }),
+    );
+  });
+
   it("sends existing listings again when the saved price drops", async () => {
     const search = savedSearch({
       sentAdvertIds: ["1"],
