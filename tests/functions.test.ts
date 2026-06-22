@@ -11,6 +11,7 @@ afterEach(() => {
   delete process.env.TELEGRAM_ALLOWED_CHAT_IDS;
   delete process.env.TELEGRAM_WEBHOOK_SECRET;
   delete process.env.KRISHA_FETCH_ENABLED;
+  delete process.env.FIRECRAWL_API_KEY;
 });
 
 describe("Netlify functions", () => {
@@ -19,11 +20,16 @@ describe("Netlify functions", () => {
     process.env.KRISHA_FETCH_ENABLED = "false";
 
     const response = await health(new Request("http://localhost/api/health"), context);
-    const body = (await response.json()) as { ok: boolean; reference: { geoNodes: number } };
+    const body = (await response.json()) as {
+      ok: boolean;
+      reference: { geoNodes: number };
+      config: { firecrawlConfigured: boolean };
+    };
 
     expect(response.status).toBe(200);
     expect(body.ok).toBe(true);
     expect(body.reference.geoNodes).toBeGreaterThan(0);
+    expect(body.config.firecrawlConfigured).toBe(false);
   });
 
   it("rejects invalid Telegram webhook secret", async () => {
