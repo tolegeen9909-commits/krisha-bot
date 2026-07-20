@@ -66,3 +66,11 @@ export function getAiBaseUrl(): string | undefined {
 export function getOptionalOpenAiApiKey(): string | undefined {
   return getEnv("OPENAI_API_KEY");
 }
+
+export function getOptionalFirecrawlApiKey(): string | undefined {
+  return getEnv("FIRECRAWL_API_KEY");
+}
+
+export function isFirecrawlConfigured(): boolean {
+  return Boolean(getOptionalFirecrawlApiKey());
+}

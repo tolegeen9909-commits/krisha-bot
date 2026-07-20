@@ -23,6 +23,7 @@ Supported MVP requests:
 - `задача проверить документы по объекту 12345678`
 - `мои задачи`
 - `следи за 2-комн Алматы до 45 млн`
+- `проверь мои поиски`
 - `мои поиски`
 - `останови поиск abc12345`
 - `статус`
@@ -47,6 +48,7 @@ KRISHA_FETCH_ENABLED=false
 KRISHA_MAX_RESULTS=5
 AI_INTENT_ENABLED=false
 AI_MODEL=gpt-4o-mini
+FIRECRAWL_API_KEY=
 ```
 
 Run locally:
@@ -80,7 +82,7 @@ curl -X POST http://localhost:8888/api/check-reminders \
 Set these in Netlify environment variables:
 
 - `TELEGRAM_ALLOWED_CHAT_IDS` - comma-separated Telegram chat IDs allowed to use the bot.
-- `TELEGRAM_BOT_TOKEN` - Telegram bot token, required for scheduled saved-search alerts.
+- `TELEGRAM_BOT_TOKEN` - Telegram bot token, required for manual saved-search update messages and scheduled reminders.
 - `TELEGRAM_WEBHOOK_SECRET` - random secret sent by Telegram in `X-Telegram-Bot-Api-Secret-Token`.
 - `KRISHA_FETCH_ENABLED` - `true` to fetch one public Krisha result page; default should stay `false` until manually tested.
 - `KRISHA_MAX_RESULTS` - max listings in a reply, default `5`, capped at `10`.
@@ -88,8 +90,9 @@ Set these in Netlify environment variables:
 - `AI_MODEL` - model for AI intent parsing, default `gpt-4o-mini`.
 - `OPENAI_BASE_URL` - optional OpenAI-compatible gateway URL, for example Netlify AI Gateway.
 - `OPENAI_API_KEY` - optional OpenAI API key when not using Netlify AI Gateway.
+- `FIRECRAWL_API_KEY` - optional Firecrawl key for fallback public-page reading when the direct Krisha parser finds no listings or direct fetch fails.
 
-The webhook can answer Telegram directly, but scheduled saved-search alerts need `TELEGRAM_BOT_TOKEN` because they send messages outside the incoming webhook request.
+The webhook can answer simple Telegram requests directly, but manual saved-search checks and scheduled reminders need `TELEGRAM_BOT_TOKEN` because they can send messages outside the immediate webhook response.
 
 ## Natural Language Parsing
 
@@ -126,6 +129,14 @@ Useful commands:
 
 Market analysis is a heuristic snapshot from fetched public listings, not an official appraisal.
 
+## Firecrawl Fallback
+
+Firecrawl can strengthen public search reading when enabled with `FIRECRAWL_API_KEY`.
+
+The bot still tries the local Krisha HTML parser first. Firecrawl is called only if the direct parser returns no listings or the direct fetch fails. Firecrawl output is converted back into the same public listing fields: title, price, URL, date text, and summary when visible.
+
+Firecrawl is not used for Krisha login, hidden phone numbers, CAPTCHA solving, proxy rotation, or protected account-only data. If `FIRECRAWL_API_KEY` is empty, the bot behaves exactly like before.
+
 ## Residential Complex Search
 
 The bot understands residential complex names in public apartment searches:
@@ -148,7 +159,7 @@ The bot can keep simple realtor tasks inside Telegram:
 - `готово abc12345` - close a task.
 - `удали задачу abc12345` - delete a task.
 
-Reminder parsing uses the Asia/Almaty timezone. Scheduled reminder delivery uses `TELEGRAM_BOT_TOKEN`, the same token required by saved-search alerts.
+Reminder parsing uses the Asia/Almaty timezone. Scheduled reminder delivery uses `TELEGRAM_BOT_TOKEN`.
 
 ## Telegram Webhook
 

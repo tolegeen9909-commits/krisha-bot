@@ -1,6 +1,12 @@
 import type { Config, Context } from "@netlify/functions";
 import { categories, geoNodes } from "../../src/krisha/reference";
-import { getAiModel, getEnv, isAiIntentEnabled, isKrishaFetchEnabled } from "../../src/shared/config";
+import {
+  getAiModel,
+  getEnv,
+  isAiIntentEnabled,
+  isFirecrawlConfigured,
+  isKrishaFetchEnabled,
+} from "../../src/shared/config";
 import { jsonResponse, methodNotAllowed } from "../../src/shared/http";
 
 export default async (req: Request, _context: Context) => {
@@ -20,6 +26,7 @@ export default async (req: Request, _context: Context) => {
       aiIntentEnabled: isAiIntentEnabled(),
       aiModel: getAiModel(),
       aiProviderConfigured: Boolean(getEnv("OPENAI_BASE_URL") || getEnv("OPENAI_API_KEY")),
+      firecrawlConfigured: isFirecrawlConfigured(),
     },
   });
 };

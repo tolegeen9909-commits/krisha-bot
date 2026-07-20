@@ -220,6 +220,78 @@ The scheduled function will be conservative: process a small capped number of ac
 - Telegram send may fail; keep seen ids update conservative so failures can retry.
 - Rollback: disable scheduled function or mark saved searches inactive; normal one-off search remains unaffected.
 
+## Feature: Firecrawl Public Search Fallback
+
+**Spec:** [docs/specs/2026-06-22-firecrawl-fallback.md](docs/specs/2026-06-22-firecrawl-fallback.md)
+**Status:** [x] Gate 4 - implemented, deployed, and smoke-tested
+
+### Architecture And Data Flow
+
+```
+runPublicSearch(searchUrl, limit, intent)
+  -> direct Krisha fetch + local HTML extractor
+  -> if listings found: return direct results
+  -> if zero listings or fetch failure:
+       -> if FIRECRAWL_API_KEY missing: keep current result
+       -> POST https://api.firecrawl.dev/v2/scrape
+       -> request markdown/html for the same public search URL
+       -> extract /a/show/<id> links from Firecrawl output
+       -> filter and sort with existing intent rules
+       -> return fallback listings when found
+```
+
+Firecrawl remains optional and public-data-only. It does not use Krisha login, reveal phone numbers, solve CAPTCHA, rotate proxies, or interact with protected flows.
+
+### Files To Create Or Modify
+
+- `src/shared/config.ts` - add optional Firecrawl config helpers.
+- `src/krisha/firecrawlClient.ts` - small REST client for `/v2/scrape`.
+- `src/krisha/firecrawlExtractor.ts` - convert Firecrawl markdown/html output into `ListingResult[]`.
+- `src/krisha/searchRunner.ts` - call fallback only after direct extraction fails or returns zero listings.
+- `netlify/functions/health.ts` - show whether Firecrawl is configured without exposing secrets.
+- `.env.example` - document `FIRECRAWL_API_KEY`.
+- `README.md` - add setup note and safety boundary.
+- `tests/searchRunner.test.ts` or new tests - cover direct precedence and fallback behavior.
+
+### MVP
+
+- REST `fetch` integration; no SDK dependency.
+- Only `/v2/scrape`.
+- Only `markdown` and `html` formats.
+- Reuse existing `filterListingsForIntent` and `sortListingsForIntent`.
+- Return at most the requested limit.
+
+### Later Work
+
+- Schema-guided JSON extraction if markdown/html fallback is not enough.
+- Per-search source diagnostics in Telegram messages.
+- Admin command to check Firecrawl availability.
+
+### Implementation Checklist
+
+- [x] Add Firecrawl config helpers and `.env.example` entry.
+- [x] Add Firecrawl REST client.
+- [x] Add Firecrawl listing extractor.
+- [x] Wire fallback into `runPublicSearch`.
+- [x] Add health flag.
+- [x] Add tests.
+- [x] Run typecheck, tests, build, and audit.
+- [x] Deploy to Netlify and verify production health.
+
+### Validation Plan
+
+- `npm run typecheck`
+- `npm test -- --run`
+- `npm run build`
+- `npm audit --audit-level=high --cache .npm-cache`
+- Production smoke: `/` and `/api/health`.
+
+### Risks And Rollback Notes
+
+- Firecrawl may cost credits when enabled; keep fallback only and limit results.
+- Firecrawl may still fail on protected or blocked pages; direct parser remains primary.
+- Rollback is simple: remove `FIRECRAWL_API_KEY` from Netlify env or revert this feature.
+
 ## Feature: Flexible Filters And AI Intent Parser
 
 **Spec:** [docs/specs/2026-06-17-flexible-krisha-filters.md](docs/specs/2026-06-17-flexible-krisha-filters.md)
