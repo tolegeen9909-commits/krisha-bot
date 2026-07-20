@@ -114,3 +114,46 @@ Fix saved-search behavior so the Telegram bot does not resend old Krisha listing
 - Manual saved-search checks can still send Telegram updates immediately when the user asks for them.
 - Runtime search behavior depends on Krisha public page structure and Netlify environment variables.
 - The local global npm cache still has permission issues; using the project-local `.npm-cache` remains the reliable Netlify CLI path.
+
+## 2026-07-20 Session Close
+
+### Session Goal
+
+Define the correct search setup for 3-room apartments in Almaty, Medeu district, priced from 250 million tenge, and decide whether OpenClaw should operate the search.
+
+### Changes Made
+
+- Confirmed that the existing deterministic parser already supports the requested city, district, room count, and minimum-price filters.
+- Confirmed the saved-search command format: `следи за 3-комнатными квартирами на продажу в Алматы, Медеуский район, от 250 млн`.
+- Chose a hybrid OpenClaw architecture for future work: keep deterministic Krisha search, deduplication, and price history in this project; use OpenClaw for conversational control, scheduling, analysis, Telegram summaries, and browser fallback.
+- No production code was changed during this session.
+
+### Decisions
+
+- The requested price is a minimum of 250 million tenge with no upper limit.
+- OpenClaw should not be the only Krisha parser because browser-only recurring automation is less deterministic and more sensitive to page changes, CAPTCHA, and blocking.
+- The existing bot remains the source of truth for filters and listing history.
+
+### Verification
+
+- `npm test -- --run` passed: 14 test files, 83 tests.
+- `npm run typecheck` passed.
+- `npm run build` passed.
+- GitHub authentication was verified for `tolegeen9909-commits`.
+- PR #4 was open for the current branch; GitHub reported no CI checks for the branch.
+
+### Links
+
+- GitHub repository: https://github.com/tolegeen9909-commits/krisha-bot
+- PR: https://github.com/tolegeen9909-commits/krisha-bot/pull/4
+- Netlify site: https://krisha-telegram-bot.netlify.app
+
+### Remaining Work
+
+- If OpenClaw integration is requested, write and approve a dedicated specification and implementation plan before changing production code.
+- Test the requested saved-search command directly in Telegram when ready.
+
+### Risks
+
+- Runtime search quality depends on the public Krisha page structure and production environment variables.
+- Browser automation should remain a fallback because CAPTCHA or layout changes can interrupt it.
